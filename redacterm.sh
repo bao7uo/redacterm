@@ -10,7 +10,7 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 
 # Unless required by applicable law or agreed to in writing, software
-    # distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -82,7 +82,7 @@ declare -A effects=(
 function read_key_byte {
   if [ -n "$1" ]; then 
     read -rsN1 -t 0.1 key_byte
-  else
+  else 
     read -rsN1 key_byte 
   fi
 }
@@ -123,8 +123,8 @@ function get_terminal {
 function get_cursor_pos {
   echo -ne "\x1b[6n" > /dev/tty
   IFS=';' read -t 1 -s -d 'R' ROW COL < /dev/tty
-  crow="${ROW#*[}"
-  ccol="${COL#*[}"
+  crow="${ROW#*\[}"
+  ccol="${COL#*\[}"
 }
 
 function set_menu_key {
@@ -143,9 +143,9 @@ function initial_menu_key {
 }
 
 function status_initial_menu_key {
-  status="$1"
-  [ -z "$edit" ] && status=$(initial_menu_key $status)
-  echo -n $status
+  result="$1"
+  [ -z "$edit" ] && result=$(initial_menu_key $result)
+  echo -n $result
 }
 
 function clear_to_line_end {
@@ -208,17 +208,24 @@ function cursor_set_pos {
 
 function cursor_move {
 # arg1 direction arg2 distance arg3 enter
-  declare -A DIRS_DELTAS=(
-    [U]="(-1 0)"
-    [D]="(1 0)"
-    [L]="(0 -1)"
-    [R]="(0 1)"
+  declare -A DIRS_RDELTAS=(
+    [U]="-1"
+    [D]="1"
+    [L]="0"
+    [R]="0"
   )
-  declare -a DIR_DELTAS="${DIRS_DELTAS[$1]}"
-  r_delta=${DIR_DELTAS[0]} 
-  c_delta=${DIR_DELTAS[1]}
-  r_delta_multiple=$(( r_delta * $2 ))
-  c_delta_multiple=$(( c_delta * $2 ))
+
+  declare -A DIRS_CDELTAS=(
+    [U]="0"
+    [D]="0"
+    [L]="-1"
+    [R]="1"
+  )
+
+  r_delta=${DIRS_RDELTAS[$1]} 
+  c_delta=${DIRS_CDELTAS[$1]}
+  r_delta_multiple=$(( $r_delta * $2 ))
+  c_delta_multiple=$(( $c_delta * $2 ))
 
   r_new=$(( $crow + $r_delta_multiple ))
   c_new=$(( $ccol + $c_delta_multiple ))
