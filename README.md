@@ -5,20 +5,6 @@ Finalise your bash terminal output in preparation for screenshots
 - Colour/Highlight
 - Redact
 
-## Demo
-
-### Edit
-
-![demo-edit](images/redacterm-demo-edit.gif)
-
-### Highlight
-
-![demo-highlight](images/redacterm-demo-highlight.gif)
-
-### Redact
-
-![demo-redact](images/redacterm-demo-redact.gif)
-
 ## Usage
 #### TL;DR: 
 - Run the script
