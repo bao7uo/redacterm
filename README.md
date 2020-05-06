@@ -9,7 +9,7 @@ Finalise your bash terminal output in preparation for screenshots
 - No install required, just run the script
 
 ## Requirements
-- Bash 4 (i.e. most modern Linux and WSL)
+- Bash 4 (this is included by default with most modern Linux and WSL)
 
 ## Roadmap
 - Increased compatibility
