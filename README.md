@@ -12,7 +12,7 @@ Finalise your bash terminal output in preparation for screenshots
 - Bash 4 (this is included by default with most modern Linux and WSL)
 
 ## Roadmap
-- Increased compatibility (i.e. Bash 3 / Mac OS X)
+- Increased compatibility (Bash 3 for Mac OS X, zsh)
 
 ## Feedback
 Suggestions and contributions are welcome, particularly in regard to the best values for the different settings.
